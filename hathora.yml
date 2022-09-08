@@ -1,0 +1,40 @@
+types:
+  # Direction enums
+  XDirection:
+    - NONE
+    - LEFT
+    - RIGHT
+  YDirection:
+    - NONE
+    - UP
+    - DOWN
+
+  # Game objects
+  Position:
+    x: float
+    y: float
+  Direction:
+    horizontal: XDirection
+    vertical: YDirection
+  Player:
+    id: UserId
+    position: Position
+    direction: Direction
+
+  # Main game state
+  GameState:
+    players: Player[]
+
+# RPC definitions
+methods:
+  joinGame:
+  setDirection:
+    direction: Direction
+
+# Authentication config
+auth:
+  anonymous: {}
+
+userState: GameState
+error: string
+tick: 50
