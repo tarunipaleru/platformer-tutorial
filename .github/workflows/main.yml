@@ -15,4 +15,3 @@ jobs:
       - run: hathora cloud deploy --appName hathora-platformer --token ${{ secrets.HATHORA_TOKEN }}
 
 
-
