@@ -13,4 +13,15 @@ jobs:
       - run: npm install -g hathora
       - run: hathora cloud deploy --appName hathora-platformer --token ${{ secrets.HATHORA_TOKEN }}
 
-
+frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install hathora -g
+      - run: APP_SECRET=${{ secrets.HATHORA_APP_SECRET }} hathora build --only client
+      - run: echo '/* /index.html 200' > client/web/dist/_redirects;
+      - run: |
+          npx netlify deploy --prod \
+          --site '${{ secrets.NETLIFY_SITE_ID }}' \
+          --auth '${{ secrets.NETLIFY_AUTH_TOKEN }}' \
+          --dir=client/web/dist;
