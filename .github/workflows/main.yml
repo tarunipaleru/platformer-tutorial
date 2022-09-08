@@ -1,0 +1,19 @@
+
+name: platformer Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm install ts-node -g
+      - run: npm install -g hathora
+      - run: hathora cloud deploy --appName hathora-platformer --token ${{ secrets.HATHORA_TOKEN }}
+
+
+
